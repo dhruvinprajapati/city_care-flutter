@@ -1,7 +1,14 @@
+import 'package:care_city/pages/incident_report_page.dart';
 import 'package:care_city/widgets/incident_list.dart';
 import 'package:flutter/material.dart';
 
 class IncidentListPage extends StatelessWidget {
+  Future<void> _navigateToReportIncidentPage(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => IncidentReportPage(),
+        fullscreenDialog: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +25,9 @@ class IncidentListPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
-                  onPressed: null,
+                  onPressed: () {
+                    _navigateToReportIncidentPage(context);
+                  },
                   child: Icon(Icons.add),
                 ),
               ),
