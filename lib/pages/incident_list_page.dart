@@ -1,10 +1,11 @@
 import 'package:care_city/pages/incident_report_page.dart';
+import 'package:care_city/services/webservice.dart';
 import 'package:care_city/widgets/incident_list.dart';
 import 'package:flutter/material.dart';
 
 class IncidentListPage extends StatelessWidget {
-  Future<void> _navigateToReportIncidentPage(BuildContext context) {
-    Navigator.push(
+  Future<void> _navigateToReportIncidentPage(BuildContext context) async{
+    await Navigator.push(
         context, MaterialPageRoute(builder: (context) => IncidentReportPage(),
         fullscreenDialog: true));
   }
@@ -26,7 +27,8 @@ class IncidentListPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
                   onPressed: () {
-                    _navigateToReportIncidentPage(context);
+                    WebService().saveIncident();
+                    // _navigateToReportIncidentPage(context);
                   },
                   child: Icon(Icons.add),
                 ),
