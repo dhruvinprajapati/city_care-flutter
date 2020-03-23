@@ -32,6 +32,16 @@ class _IncidentListPageState extends State<IncidentListPage> {
                 ),
             fullscreenDialog: true));
   }
+  Widget _updateUI(IncidentListViewModel vm){
+    switch(vm.status){
+      case Status.loading:
+        return Align(child: CircularProgressIndicator(),);
+      case Status.empty:
+        return Text("No Incident found");
+      case Status.success:
+       return IncidentList(incidents: vm.incident);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +53,8 @@ class _IncidentListPageState extends State<IncidentListPage> {
       ),
       body: Stack(
         children: <Widget>[
-          IncidentList(incidents: vm.incident),
+          _updateUI(vm),
+          
           SafeArea(
             child: Align(
               alignment: Alignment.bottomRight,
