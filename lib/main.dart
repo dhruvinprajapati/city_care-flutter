@@ -1,5 +1,8 @@
 import 'package:care_city/pages/incident_list_page.dart';
+import 'package:care_city/view_models/incident_list_view_model.dart';
+import 'package:care_city/view_models/incident_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +24,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: IncidentListPage(),
+      home: ChangeNotifierProvider(
+        create: (context) => IncidentListViewModel(),
+        child: IncidentListPage(),
+        ),
     );
   }
 }

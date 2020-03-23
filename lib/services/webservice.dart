@@ -5,8 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 class WebService {
+  var dio = new Dio();
   Future<void> saveIncident(Incident incident) async {
-    var dio = new Dio();
+    
     final url = "http://test.karbh.com/test";
     FormData form =
         FormData.fromMap({"title": incident.title, "description": incident.description});
@@ -28,4 +29,16 @@ class WebService {
     // },
     //     );
   }
+
+  Future<List<Incident>> getAllIncident() async{
+    final url = "http://test.karbh.com/test";
+    final response = await dio.get(url);
+    if(response.statusCode == 200){
+      final Iterable json = response.data;
+      return json.map((incident)=>Incident.fromJson(incident)).toList();
+    } else{
+      throw Exception("Unable to get incident");
+    }
+  }
+
 }
