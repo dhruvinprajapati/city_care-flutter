@@ -27,6 +27,8 @@ dependencies:
   http:
   provider:
   image_picker:
+  camera:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
