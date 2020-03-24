@@ -6,6 +6,7 @@ class ReportIncidentViewModel extends ChangeNotifier{
 
   String title;
   String description;
+  String imagePath;
 
   Future<void> saveIncident() async{
     
