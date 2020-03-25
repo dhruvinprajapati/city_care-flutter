@@ -13,24 +13,19 @@ class WebService {
 
     File file = File(incident.imageURL);
     final filename = basename(file.path.replaceAll(" ",""));
-    
+    debugPrint(filename+incident.imageURL);
     final url = "http://test.karbh.com/test";
     FormData form =
         FormData.fromMap({
           "title": incident.title, 
           "description": incident.description,
-          "image" : await MultipartFile.fromFile(incident.imageURL,filename: filename)
+          "file" : await MultipartFile.fromFile(incident.imageURL,filename: filename)
           });
-    try {
-      Response response = await dio.post(
+    
+       await dio.post(
         url,
-        data: form,
-        options: Options(contentType: "application/x-www-from-urlencoded"),
-      );
-      print(response);
-    } catch (e) {
-      print(e);
-    }
+        data: form).then((response) => print(response))
+  .catchError((error) => print(error));
     //   await http.post(
     //     url,
     //     body: {"title":"Dhruvin","description":"prajapati"},
