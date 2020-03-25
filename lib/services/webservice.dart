@@ -1,16 +1,26 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:care_city/models/incident.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 
 class WebService {
   var dio = new Dio();
   Future<void> saveIncident(Incident incident) async {
+
+    File file = File(incident.imageURL);
+    final filename = basename(file.path.replaceAll(" ",""));
     
     final url = "http://test.karbh.com/test";
     FormData form =
-        FormData.fromMap({"title": incident.title, "description": incident.description});
+        FormData.fromMap({
+          "title": incident.title, 
+          "description": incident.description,
+          "image" : await MultipartFile.fromFile(incident.imageURL,filename: filename)
+          });
     try {
       Response response = await dio.post(
         url,

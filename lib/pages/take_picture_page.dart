@@ -30,7 +30,9 @@ class _TakePicturePageState extends State<TakePicturePage> {
       final path = join((await getTemporaryDirectory()).path,'${DateTime.now()}');
 
       await _cameraController.takePicture(path);
+
       Navigator.pop(context,path);
+      
     }catch(e){
       print(e);
     }
