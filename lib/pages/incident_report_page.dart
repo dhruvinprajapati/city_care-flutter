@@ -72,6 +72,11 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
     });
   }
 
+  void _saveIncident(BuildContext context)async{
+    await _reportIncidentViewModel.saveIncident();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<ReportIncidentViewModel>(context);
@@ -108,8 +113,7 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
         ),
         FlatButton(
           onPressed: () {
-            vm.saveIncident();
-            Navigator.pop(context);
+            _saveIncident(context);
           },
           child: Text("save"),
           color: Colors.green,

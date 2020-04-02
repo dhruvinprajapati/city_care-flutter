@@ -14,6 +14,7 @@ class IncidentList extends StatelessWidget {
       itemBuilder: (context,index){
         final incident = incidents[index];
         return ListTile(
+          leading: Image.network('http://test.karbh.com/images/${incident.imageURL}'),
           title: Text(incident.title),
         );
       },
